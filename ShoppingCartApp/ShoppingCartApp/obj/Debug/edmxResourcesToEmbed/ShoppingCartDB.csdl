@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MC_ShoppingCartModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Image">
+    <Key>
+      <PropertyRef Name="productID" />
+    </Key>
+    <Property Name="productID" Type="Int32" Nullable="false" />
+    <Property Name="imageTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Product" Relationship="Self.FK__Images__imageTit__36B12243" FromRole="Images" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="productID" />
+    </Key>
+    <Property Name="productID" Type="Int32" Nullable="false" />
+    <Property Name="productName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="price" Type="Decimal" Precision="19" Scale="4" />
+    <NavigationProperty Name="Image" Relationship="Self.FK__Images__imageTit__36B12243" FromRole="Product" ToRole="Images" />
+    <NavigationProperty Name="ProductVisits" Relationship="Self.FK__ProductVi__produ__276EDEB3" FromRole="Product" ToRole="ProductVisit" />
+  </EntityType>
+  <EntityType Name="ProductVisit">
+    <Key>
+      <PropertyRef Name="sessionID" />
+      <PropertyRef Name="productID" />
+    </Key>
+    <Property Name="sessionID" Type="String" MaxLength="44" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="productID" Type="Int32" Nullable="false" />
+    <Property Name="qtyOrdered" Type="Int32" />
+    <Property Name="updated" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Product" Relationship="Self.FK__ProductVi__produ__276EDEB3" FromRole="ProductVisit" ToRole="Product" />
+    <NavigationProperty Name="Visit" Relationship="Self.FK__ProductVi__sessi__267ABA7A" FromRole="ProductVisit" ToRole="Visit" />
+  </EntityType>
+  <EntityType Name="Visit">
+    <Key>
+      <PropertyRef Name="sessionID" />
+    </Key>
+    <Property Name="sessionID" Type="String" MaxLength="44" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="started" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="ProductVisits" Relationship="Self.FK__ProductVi__sessi__267ABA7A" FromRole="Visit" ToRole="ProductVisit" />
+  </EntityType>
+  <Association Name="FK__Images__imageTit__36B12243">
+    <End Role="Product" Type="Self.Product" Multiplicity="1" />
+    <End Role="Images" Type="Self.Image" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="productID" />
+      </Principal>
+      <Dependent Role="Images">
+        <PropertyRef Name="productID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ProductVi__produ__276EDEB3">
+    <End Role="Product" Type="Self.Product" Multiplicity="1" />
+    <End Role="ProductVisit" Type="Self.ProductVisit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="productID" />
+      </Principal>
+      <Dependent Role="ProductVisit">
+        <PropertyRef Name="productID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ProductVi__sessi__267ABA7A">
+    <End Role="Visit" Type="Self.Visit" Multiplicity="1" />
+    <End Role="ProductVisit" Type="Self.ProductVisit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Visit">
+        <PropertyRef Name="sessionID" />
+      </Principal>
+      <Dependent Role="ProductVisit">
+        <PropertyRef Name="sessionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MC_ShoppingCartEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="Images" EntityType="Self.Image" />
+    <EntitySet Name="Products" EntityType="Self.Product" />
+    <EntitySet Name="ProductVisits" EntityType="Self.ProductVisit" />
+    <EntitySet Name="Visits" EntityType="Self.Visit" />
+    <AssociationSet Name="FK__Images__imageTit__36B12243" Association="Self.FK__Images__imageTit__36B12243">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="Images" EntitySet="Images" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ProductVi__produ__276EDEB3" Association="Self.FK__ProductVi__produ__276EDEB3">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="ProductVisit" EntitySet="ProductVisits" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ProductVi__sessi__267ABA7A" Association="Self.FK__ProductVi__sessi__267ABA7A">
+      <End Role="Visit" EntitySet="Visits" />
+      <End Role="ProductVisit" EntitySet="ProductVisits" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

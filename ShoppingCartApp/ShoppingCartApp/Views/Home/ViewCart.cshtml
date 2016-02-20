@@ -1,0 +1,91 @@
+﻿@model ShoppingCartApp.Models.ShoppingCartVM
+
+@{
+    ViewBag.Title = "Shopping Cart";
+}
+
+<h2>@Html.Raw(ViewBag.Title)</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="products clearfix col-sm-12 col-md-8">
+            @{
+                if (ViewBag.Message != null)
+                {
+                    @Html.Raw("<h3 class=\"empty\">" + @ViewBag.Message + "</h3>")
+                }
+            }
+            @for (int i = 0; i < Model.CartItems.Count; i++)
+            {
+                <div class="product">
+                    <p> @Html.DisplayFor(x => x.CartItems[i].productName) </p>
+                    @Html.HiddenFor(x => x.CartItems[i].productName)
+
+                    <img src="~/Content/Images/@Html.Raw(Model.CartItems[i].image)" />
+                    @Html.HiddenFor(x => x.CartItems[i].image)
+                    <div>
+                        @Html.ValidationMessageFor(x => x.CartItems[i].quantity, null, new { @class = "alert alert-danger" })
+                        <br />
+                        <span>@Html.Raw("$")@Html.DisplayFor(x => +x.CartItems[i].price) @Html.Raw(" x ") </span>
+                        @Html.HiddenFor(x => x.CartItems[i].price)
+                        @Html.EditorFor(x => x.CartItems[i].quantity)
+                    </div>
+                    <span>@Html.Raw(" = $")@Html.DisplayFor(x => x.CartItems[i].totalCost) </span>
+                    @Html.HiddenFor(x => x.CartItems[i].totalCost)
+                    @Html.Raw("<br />")
+                    @Html.ActionLink("Remove", "ViewCart", new { id = Model.CartItems[i].productID }, new { @class = "btn btn-default" })
+                    @Html.HiddenFor(x => x.CartItems[i].productID)
+                </div>
+            }
+        </div>
+        <div class="form-group col-sm-12 col-md-4 summary">
+            <div class="clearfix">
+                <div class="items col-xs-6 col-sm-6 col-md-12">
+                    @for (int i = 0; i < Model.CartItems.Count; i++)
+                    {
+                        <div class="item-summary">
+                            <span class="heading"> @Html.DisplayFor(x => x.CartItems[i].productName) </span>
+                            <br />
+                            <span>@Html.Raw("$")@Html.DisplayFor(x => +x.CartItems[i].price) @Html.Raw(" x ") </span>
+                            @Html.DisplayFor(x => x.CartItems[i].quantity)
+                            <span>@Html.Raw(" = $")@Html.DisplayFor(x => x.CartItems[i].totalCost) </span>
+                        </div>
+                    }
+                </div>
+                <div class="total col-xs-6 col-sm-6 col-md-12">
+                    <div class="clearfix ">
+                        @Html.LabelFor(model => model.SubTotal, new { @class = "col-xs-8 col-sm-6" })
+                        <span class="col-xs-2 col-md-6"> @Html.Raw("$")@Html.DisplayFor(model => model.SubTotal) </span>
+                        @Html.HiddenFor(model => model.SubTotal)
+                    </div>
+                    <div class="clearfix">
+                        @Html.LabelFor(model => model.Tax, new { @class = "col-xs-8 col-sm-6" })
+                        <span class="col-xs-2 col-md-6"> @Html.Raw("$")@Html.DisplayFor(model => model.Tax) </span>
+                        @Html.HiddenFor(model => model.Tax)
+                    </div>
+                    <div class="clearfix">
+                        @Html.LabelFor(model => model.Total, new { @class = "col-xs-8 col-sm-6" })
+                        <span class="col-xs-2 col-md-6"> @Html.Raw("$")@Html.DisplayFor(model => model.Total) </span>
+                        @Html.HiddenFor(model => model.Total)
+                    </div>
+                </div>
+            </div>
+            <div class="buttons clearfix">
+                <input type="submit" value="Save" class="btn btn-default" />              
+                @Html.ActionLink("Checkout", "Index", null, new { @class = "btn btn-default" })
+                @Html.ActionLink("Cancel", "Index", new { cancelOrder = true }@*, new { @class = "btn btn-default"}*@)
+            </div>
+        </div>
+    </div>
+                }
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+@section styles {
+    <link href="~/Content/Products.css" rel="stylesheet" />
+    <link href="~/Content/ViewCart.css" rel="stylesheet" />
+}

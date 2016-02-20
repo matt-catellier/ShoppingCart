@@ -1,0 +1,16 @@
+﻿.rating-container {
+    margin-top: -20px;
+}
+
+.rating-select .btn {
+    font-size: 10px;
+}
+
+.btn-warning, .btn-warning:hover, .btn-warning:focus, .btn-warning:active {
+    background-color: #428bca; /*#E30613;*/
+    border-color: #428bca; /*#E30613;*/
+}
+
+.submit {
+    margin-top: 30px;
+}

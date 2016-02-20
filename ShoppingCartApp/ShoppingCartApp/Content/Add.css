@@ -1,0 +1,46 @@
+﻿.add-page {
+    padding-bottom: 40px;
+}
+
+.product-container {
+    background: #FFF;
+    max-width: 560px;
+}
+
+.add-page .product-container > div {
+    display: inline-block;
+    float: left;  
+    padding: 10px;
+}
+
+.add-page .add-form {
+    padding: 10px;
+    padding-left: 20px;
+    margin-top: 50px;
+}
+
+.add-page .form-horizontal .control-label {
+    text-align: left;
+}
+
+.add-page  .col-md-8 > span {
+    display: inline-block;
+    padding-top: 7px;
+}
+
+.add-page .product-desc h3 {
+    text-align: center;
+    text-decoration: underline;
+}
+
+.add-page .product-desc img {
+    height: 200px;
+    max-width: 200px;
+}
+
+
+
+
+
+
+

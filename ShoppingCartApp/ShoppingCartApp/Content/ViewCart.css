@@ -1,0 +1,119 @@
+﻿ .empty {
+            width: 400px;
+            margin-right: 0px;
+        }
+        .form-horizontal {
+            margin-left: 5%;
+        }
+
+        .buttons > a, .buttons > input {
+            display: inline-block;
+            float: left;
+        }
+
+        .products {
+            text-align: left;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .product {
+            text-align: center;
+            box-sizing: border-box;
+            display: inline-block;
+            width: 30%;
+            background: #FFF;
+            margin: 5px;
+            padding: 10px 5px 39px 5px;
+            color: #232729;
+            max-width: 200px;
+            /*min-width: 130px;*/
+        }
+
+            .product > img {
+                padding: 20px 5px 20px 5px;
+                background: white;
+                text-align: center;
+                width: 80%;
+                height: 100px;
+            }
+
+            .product input {
+                width: 40px;
+            }
+
+            .product > p {
+                font-weight: bold;
+            }
+
+        .summary {
+            max-height: 275px;
+            padding: 10px;
+            padding-bottom: 30px;
+            background: #FFF;
+            min-width: 260px;
+            margin-top: 5px;
+            max-width: 630px;
+        }
+            .summary .items {
+                height: 140px;
+                overflow: auto;
+                margin-bottom: 5px;
+            }
+
+            .summary > span, .summary > label {
+                display: inline-block;
+            }
+
+            .summary .item-summary {
+                padding: 5px 10px;
+                margin: 5px;
+            }
+
+                .summary .item-summary .heading {
+                    font-weight: bold;
+                }
+            .summary .buttons {
+                margin-left: 5px;
+            }
+            .summary .buttons .btn {
+                margin-left: 5px;
+            }
+
+            .buttons a[href="/?cancelOrder=True"] {
+                padding: 5px 30px 5px 5px
+            }
+
+        .alert {
+            padding: 0px;
+        }
+        .total > div {
+            padding: 0px;
+        }
+        
+
+
+
+@media (max-width: 738px) {
+
+    .summary {
+        margin-left: 20px !important;
+    }
+    .products {
+        width: 100%;
+    }
+
+    .total {
+            padding: 0px;
+        }
+
+    .summary .buttons {
+        margin-top: 20px;
+    }
+}
+
+@media (max-width: 1000px) {
+    .summary {
+        margin-left: 20px!important;
+    }
+}

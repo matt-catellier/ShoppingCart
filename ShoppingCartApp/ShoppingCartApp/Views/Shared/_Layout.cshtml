@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Sports XX - @ViewBag.Title </title>
+    <link rel="shortcut icon" type="image/x-icon" href="~/Content/Images/SportXX-Logo-Icon.ico" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/NavBar.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/Footer.css" rel="stylesheet" type="text/css" />
+    @RenderSection("styles", false)
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+</head>
+<body>
+    <nav role="navigation" class="navbar navbar-custom navbar-fixed-top">
+        <div class="container">
+
+            <!-- Title -->
+            <div class="navbar-header pull-left">
+                <a href="@Url.Action("Index")" class="navbar-brand pull-left"><img src="~/Content/Images/SportXX-Logo-Small.png" alt="Home button" width="100" /></a>
+            </div>
+            <!-- 'Sticky' (non-collapsing) right-side menu item(s) -->
+            <div class="col-xs-9 col-sm-6 navbar-header pull-right">
+                <ul class="nav pull-left col-xs-10 col-sm-12">
+                    <li class="pull-right col-xs-1 cart ">
+                        <a href="@Url.Action("ViewCart")"><span class="glyphicon glyphicon-shopping-cart"></span>@*<span class="badge">42</span>*@</a>
+                    </li>
+                    <!-- This works well for static text, like a username -->
+                    <li class="pull-right search-bar col-xs-9 col-sm-9">
+                        <div class="">
+                            <form action="/Home/Index" method="post">
+                                <div class="input-group">
+                                    <input id="SearchString" name="SearchString" type="text" placeholder="Search" class="form-control" />
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </li>
+                    <li class="dropdown pull-right col-xs-2 col-sm-2">
+                        <a href="#" data-toggle="dropdown" class="dropdown-toggle">Sort<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                @Html.ActionLink("Product: A-Z", "Index", new { sortOrder = ViewBag.Product_ASC, currentFilter = ViewBag.CurrentFilter })
+                            </li>
+                            <li>
+                                @Html.ActionLink("Product: Z-A", "Index", new { sortOrder = ViewBag.Product_DESC, currentFilter = ViewBag.CurrentFilter })
+                            </li>
+                            <li>
+                                @Html.ActionLink("Price: Lowest to Highest", "Index", new { sortOrder = ViewBag.Price_ASC, currentFilter = ViewBag.CurrentFilter })
+                            </li>
+                            <li>
+                                @Html.ActionLink("Price: Highest to Lowest", "Index", new { sortOrder = ViewBag.Price_DESC, currentFilter = ViewBag.CurrentFilter })
+                            </li>
+                        </ul>
+                    </li>
+
+                </ul>
+                <!-- Required bootstrap placeholder for the collapsed menu -->
+                <button type="button" data-toggle="collapse" data-target=".navbar-collapse" class="navbar-toggle"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+            </div>
+            <!-- The Collapsing items navbar-left or navbar-right -->
+            <div class="collapse navbar-collapse navbar-left col-xs-12">
+                <!-- pull-right keeps the drop-down in line -->
+                <ul class="nav navbar-nav pull-right">
+                    <li class="clearfix">
+
+                        @Html.ActionLink("Shop", "Index") @Html.ActionLink("Cart", "ViewCart")
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+    <footer class="clearfix">
+        <div class="container">
+            <div class="contact-info col-sm-6 col-md-6">
+                <p> Sport XX</p>
+                <p> 604-123-4567</p>
+                <p> contact@sport-xx.com</p>
+                <p> 1234 Fictional Street </p>
+                <p> Vancover, BC, Canada </p>
+            </div>
+            <div class="socail-icons col-sm-6 col-md-6">
+                <i class="fa fa-facebook"></i>
+                <i class="fa fa-twitter"></i>
+                <i class="fa fa-youtube"></i>
+                <p> Matt Catellier - &copy; @DateTime.Now.Year</p>
+            </div>
+        </div>
+    </footer>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</body>
+</html>

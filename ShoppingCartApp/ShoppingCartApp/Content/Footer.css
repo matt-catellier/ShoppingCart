@@ -1,0 +1,66 @@
+﻿footer {
+    background-color: #232729;
+    border-color: transparent;
+    background-image: -webkit-gradient(linear, left 0%, left 100%, from(#3a4145), to(#232729));
+    background-image: -webkit-linear-gradient(top, #3a4145, 0%, #232729, 100%);
+    background-image: -moz-linear-gradient(top, #3a4145 0%, #232729 100%);
+    background-image: linear-gradient(to bottom, #3a4145 0%, #232729 100%);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff3a4145', endColorstr='#ff232729', GradientType=0);
+    color: #EEE;
+    padding: 10px;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+.contact-info {
+    float: left;
+    display: inline-block;
+    margin-left: 5%;
+    font-size: 16px;
+    padding: 10px;
+}
+
+    .contact-info > p {
+        padding: 0px;
+        margin: 0px;
+    }
+
+        .contact-info > p:hover {
+            color: #428bca;
+        }
+
+.socail-icons {
+    float: right;
+    display: inline-block;
+    width: 200px;
+    padding: 10px;
+    margin-right: 5%;
+}
+
+    .socail-icons > i:first-of-type {
+        margin-left: 10px;
+    }
+
+    .socail-icons > i {
+        font-size: 40px;
+        padding: 10px;
+    }
+
+        .socail-icons > i:hover {
+            color: #428bca;
+        }
+
+    .socail-icons > p {
+        font-size: 16px;
+    }
+
+@media (max-width: 768px) {
+    .socail-icons {
+        margin-right: -5%;
+    }
+
+    /*.contact-info {
+        margin-left: 10%; 
+    }*/
+}

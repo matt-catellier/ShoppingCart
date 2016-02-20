@@ -1,0 +1,50 @@
+﻿@model PagedList.IPagedList<ShoppingCartApp.Models.ProductVM>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+@{
+    ViewBag.Title = "Products";
+}
+
+<h2>@Html.Raw(ViewBag.Title)</h2>
+@{
+    var currentFilter = ViewBag.CurrentFilter;
+    if (!String.IsNullOrEmpty(currentFilter))
+    {
+        @Html.Raw("<p>\"" + ViewBag.SearchResults + "\" Search results were found matching \"" + currentFilter + "\". </p>")
+    }
+}
+<div class="products clearfix">
+    @foreach (var item in Model)
+    {
+        <div class="product">
+            <h3> @Html.DisplayFor(modelItem => item.productName)</h3>
+            <img src="~/Content/Images/@Html.Raw(item.image)" />
+            <div class="rating-select">
+                <div class="btn btn-default btn-sm"><span class="glyphicon glyphicon-star-empty"></span></div>
+                <div class="btn btn-default btn-sm"><span class="glyphicon glyphicon-star-empty"></span></div>
+                <div class="btn btn-default btn-sm"><span class="glyphicon glyphicon-star-empty"></span></div>
+                <div class="btn btn-default btn-sm"><span class="glyphicon glyphicon-star-empty"></span></div>
+                <div class="btn btn-default btn-sm"><span class="glyphicon glyphicon-star-empty"></span></div>
+            </div>
+            <div class="tag">
+                <span> $ @Html.DisplayFor(modelItem => item.price)</span>
+                <span> @Html.ActionLink("+ Add to Cart", "Add", new { productID = item.productID })</span>
+            </div>
+        </div>
+    }
+</div>
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+
+<span class="page-number">Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount </span>
+
+
+@section styles {
+    <link href="~/Content/Products.css" rel="stylesheet" />
+    <link href="~/Content/Rating.css" rel="stylesheet" />
+}
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="~/Scripts/rating.js"></script>
+
+

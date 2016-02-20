@@ -1,0 +1,78 @@
+﻿
+p, .pagination-container, h2, .page-number {
+    margin-left: 5%;
+}
+
+
+.products {
+    text-align: center;
+    padding-bottom: 30px;
+    min-height: 200px;
+    margin-bottom: 10px;
+}
+
+.product {
+    display: inline-block;
+    width: 260px;
+    background: #FFF;
+    margin: 5px;
+    padding-bottom: 30px;
+    color: #232729;
+}
+
+    .product > h3 {
+        text-decoration: underline;
+    }
+
+    .product > img {
+        padding: 20px 5px 20px 5px;
+        background: white;
+        text-align: center;
+        width: 80%;
+        height: 200px;
+    }
+
+.tag {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+    .tag a {
+        /*color: #232729;*/
+    }
+
+    .tag > span {
+        display: inline-block;
+        margin: 0 5px;
+    }
+
+/* PAGINATION */
+
+.pagination-container {
+    float: right;
+    margin-top: -30px;
+    margin-right: 5%;
+    margin-bottom: 30px;
+}
+
+.page-number {
+    margin-bottom: 10px;
+} 
+
+
+ul.pagination > li > a, ul.pagination > li > span {
+    border: 1px solid #428bca;
+}
+
+ul.pagination > .active > a, ul.pagination > .active > span,
+ul.pagination > .active > a:hover, ul.pagination > .active > span:hover,
+ul.pagination > .active > a:focus, ul.pagination > .active > span:focus {
+   /* #428bca */
+    background-color: #428bca;
+    border-color: #428bca;
+}
+
+ul.pagination a {
+    color: #428bca;
+}
+    

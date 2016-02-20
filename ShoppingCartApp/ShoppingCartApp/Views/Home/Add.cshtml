@@ -1,0 +1,68 @@
+﻿@model ShoppingCartApp.Models.ProductVM
+
+@{
+    ViewBag.Title = "Add to Cart";
+}
+<div class="add-page clearfix">
+    <h2>@Html.Raw(ViewBag.Title)</h2>
+    <div class="product-container clearfix">
+        <div class="product-desc">
+            <h3> @Html.Raw(Model.productName) </h3>
+            @Html.HiddenFor(model => model.productName)
+
+            <img src="~/Content/Images/@Html.Raw(Model.image)" />
+            @Html.HiddenFor(model => model.image)
+        </div>
+        <div class="add-form">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.price, htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-8">
+                            <span> $ @Html.DisplayFor(model => model.price, new { htmlAttributes = new { @class = "form-control" } }) </span>
+                            @Html.HiddenFor(model => model.price)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.quantity, htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.quantity, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.quantity, "",   new { @class = "alert alert-danger" } )
+                        </div>
+                    </div>
+                    <div class="form-group rating-container">
+                        <label class="control-label col-md-4"> Rating: </label>
+                        <div class="rating-select col-md-8">
+                            <div class="btn btn-default btn-sm"><span class="glyphicon glyphicon-star-empty"></span></div>
+                            <div class="btn btn-default btn-sm"><span class="glyphicon glyphicon-star-empty"></span></div>
+                            <div class="btn btn-default btn-sm"><span class="glyphicon glyphicon-star-empty"></span></div>
+                            <div class="btn btn-default btn-sm"><span class="glyphicon glyphicon-star-empty"></span></div>
+                            <div class="btn btn-default btn-sm"><span class="glyphicon glyphicon-star-empty"></span></div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group submit">
+                        <div class="col-md-offset-4 col-md-8">
+                            <input type="submit" value="Submit" class="btn btn-default" />
+                            @Html.ActionLink("Cancel", "Index")
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div><!-- Closes product container -->
+</div>
+
+@section styles {
+    <link href="~/Content/Add.css" rel="stylesheet" />
+    <link href="~/Content/Rating.css" rel="stylesheet" />
+}
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="~/Scripts/rating.js"></script>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
